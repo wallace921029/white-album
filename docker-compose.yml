@@ -1,0 +1,45 @@
+# Family album / notice center — full stack.
+#
+#   docker compose up -d --build
+#
+# Frontend (nginx) -> http://localhost:8080
+# Backend  (fastify) -> http://localhost:3000
+#
+# The SPA talks to the backend at http://localhost:3000 (hardcoded in src/),
+# so the backend port is published on the host for the browser to reach it.
+# Open the app from the same machine that runs Docker, or change the API base
+# URL in the frontend if you deploy them on different hosts.
+
+services:
+  backend:
+    build:
+      context: ./backend
+    image: white-album-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      DATA_DIR: /data
+      # REQUIRED in production: override with a long random string.
+      JWT_SECRET: ${JWT_SECRET:-change-me-to-a-long-random-string}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-30d}
+      # Tighten to the frontend origin in production, e.g. http://localhost:8080
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+      MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-26214400}
+      # Code the very first user registers with to become admin.
+      BOOTSTRAP_INVITE_CODE: ${BOOTSTRAP_INVITE_CODE:-MantleAdmin2026}
+    volumes:
+      # Single bind mount persists the SQLite DB + uploaded photos on the host.
+      # Relative to this compose file, i.e. the directory next to the repo.
+      - ./album-data:/data
+
+  frontend:
+    build:
+      context: .
+    image: white-album-frontend
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
