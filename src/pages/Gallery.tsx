@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Bell, Settings, Play, Pause, ChevronLeft, ChevronRight, Image as ImageIcon, AlertCircle } from 'lucide-react';
+import { Bell, Settings, Play, Pause, ChevronLeft, ChevronRight, Image as ImageIcon, AlertCircle, Maximize, Minimize } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertTitle, AlertDescription, AlertAction } from '@/components/ui/alert';
 import '../App.css';
 
-const API_BASE = 'http://localhost:3000';
+import { API_BASE } from '@/lib/api';
+import { useWakeLock } from '@/lib/use-wake-lock';
 
 interface Photo {
   id: number;
@@ -33,6 +34,10 @@ function Gallery() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [lang, setLang] = useState<'en' | 'zh'>('zh');
   const [time, setTime] = useState('');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  // 进入照片轮播页即默认开启防黑屏(老设备自动回退,见 useWakeLock)。
+  useWakeLock();
 
   const handleMarkAsRead = async (id: number) => {
     try {
@@ -80,6 +85,22 @@ function Gallery() {
     setLang(newLang);
     localStorage.setItem('lang', newLang);
   };
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => {
+        console.error('Failed to enter fullscreen', err);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
+
+  useEffect(() => {
+    const onFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
+    document.addEventListener('fullscreenchange', onFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', onFullscreenChange);
+  }, []);
 
   const fetchPhotos = () => {
     axios.get(`${API_BASE}/photos`, {
@@ -147,6 +168,9 @@ function Gallery() {
           <span className="font-medium text-white/90 text-[15px]">{time}</span>
         </div>
         <div className="flex items-center gap-6">
+          {isFullscreen
+            ? <Minimize onClick={toggleFullscreen} className="w-4 h-4 hover:opacity-70 cursor-pointer transition-opacity" />
+            : <Maximize onClick={toggleFullscreen} className="w-4 h-4 hover:opacity-70 cursor-pointer transition-opacity" />}
           <div className="flex items-center gap-2">
             <button onClick={() => handleLangChange('en')} className={`hover:opacity-70 transition-opacity ${lang === 'en' ? 'font-semibold' : ''}`}>EN</button>
             <span className="opacity-50">/</span>

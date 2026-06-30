@@ -10,7 +10,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "start": "fastify start -l info dist/src/app.js",
-    "dev": "npm run build && concurrently -k -n tsc,app -c blue,green \"tsc -w --preserveWatchOutput\" \"fastify start -w -l info dist/src/app.js\"",
+    "dev": "tsx watch node_modules/fastify-cli/cli.js start -l info -a 0.0.0.0 src/app.ts",
     "test": "tsc && node --test \"dist/test/**/*.test.js\"",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
@@ -36,8 +36,8 @@
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^26.0.1",
-    "concurrently": "^10.0.3",
     "drizzle-kit": "^0.31.10",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3"
   }
 }

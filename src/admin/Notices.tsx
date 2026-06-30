@@ -10,7 +10,7 @@ import { Plus, Trash2, Edit2, Pin, PinOff, Bell } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 
-const API_BASE = 'http://localhost:3000';
+import { API_BASE } from '@/lib/api';
 
 interface Notice {
   id: number;

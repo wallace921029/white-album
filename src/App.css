@@ -34,3 +34,23 @@
   object-fit: contain;
   background-color: transparent;
 }
+
+/* 全屏修复:iPad/桌面 Safari 在全屏下给全屏元素(<html>)和 ::backdrop 的默认
+   背景是白色,会在上下露出白边。显式刷成黑底并铺满。每个前缀写成独立规则——
+   选择器列表里出现浏览器不认的选择器会让整条规则失效,故不能用逗号合并。 */
+:fullscreen {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+::backdrop {
+  background-color: #000;
+}
+::-webkit-backdrop {
+  background-color: #000;
+}

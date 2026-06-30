@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Plus, Trash2, Key, Copy, Check } from 'lucide-react';
 
-const API_BASE = 'http://localhost:3000';
+import { API_BASE } from '@/lib/api';
 
 interface Invite {
   id: number;

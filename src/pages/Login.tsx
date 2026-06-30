@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 
-const API_BASE = 'http://localhost:3000';
+import { API_BASE } from '@/lib/api';
 
 export default function Login() {
   const [username, setUsername] = useState('');

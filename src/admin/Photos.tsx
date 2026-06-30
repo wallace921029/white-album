@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Plus, Trash2, Edit2, Upload } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from '@/components/ui/dialog';
 
-const API_BASE = 'http://localhost:3000';
+import { API_BASE } from '@/lib/api';
 
 interface Photo {
   id: number;

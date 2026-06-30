@@ -15,7 +15,7 @@
 - Frontend lint: `npm run lint`
 - Frontend preview: `npm run preview`
 - Backend install: `cd backend && npm install`
-- Backend dev server: `cd backend && npm run dev` (tsc watch + fastify watch)
+- Backend dev server: `cd backend && npm run dev` (`tsx watch` runs `src/app.ts` directly; restarts on change, no build/`dist/` needed; no type-checking — use `npm run typecheck`)
 - Backend build / typecheck: `cd backend && npm run build` / `npm run typecheck`
 - Backend production start: `cd backend && npm start`
 - Backend tests: `cd backend && npm test`

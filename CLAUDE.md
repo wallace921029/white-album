@@ -40,7 +40,7 @@ Frontend (run from repo root):
 
 Backend (run from `backend/`, TypeScript):
 - `cd backend && npm install`
-- `cd backend && npm run dev` — builds once, then runs `tsc -w` + `fastify start -w dist/src/app.js` concurrently
+- `cd backend && npm run dev` — `tsx watch` runs the TS source (`src/app.ts`) directly via the fastify-cli entry, restarting on change; no build step and no `dist/` needed for dev. tsx transpiles without type-checking, so run `npm run typecheck` (or rely on your editor) for type errors.
 - `cd backend && npm run build` — `tsc` → `dist/`
 - `cd backend && npm run typecheck` — `tsc --noEmit`
 - `cd backend && npm start` — production (`fastify start dist/src/app.js`; build first)

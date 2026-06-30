@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Image as ImageIcon, Bell, Key, MessageSquare, ArrowRight } from 'lucide-react';
 
 
-const API_BASE = 'http://localhost:3000';
+import { API_BASE } from '@/lib/api';
 
 interface Invite {
   id: number;
