@@ -1,0 +1,136 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --sans: "SF Pro Text", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --heading: "SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 17px/1.47 var(--sans);
+  letter-spacing: -0.022em; /* ~ -0.374px for 17px */
+  color-scheme: light dark;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1f;
+
+  --primary: #0066cc;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f5f5f7;
+  --secondary-foreground: #1d1d1f;
+
+  --muted: #f5f5f7;
+  --muted-foreground: #7a7a7a;
+
+  --accent: #f5f5f7;
+  --accent-foreground: #1d1d1f;
+
+  --destructive: #ff3b30;
+  --destructive-foreground: #ffffff;
+
+  --border: #e0e0e0;
+  --input: #e0e0e0;
+  --ring: #0071e3;
+
+  --radius: 0.5rem; /* rounded-sm corresponds to 8px in DESIGN.md */
+}
+
+@theme inline {
+  --font-heading: var(--heading);
+  --font-sans: var(--sans);
+
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
+  
+  --card: #272729;
+  --card-foreground: #ffffff;
+  
+  --popover: #2a2a2c;
+  --popover-foreground: #ffffff;
+  
+  --primary: #2997ff;
+  --primary-foreground: #ffffff;
+  
+  --secondary: #333333;
+  --secondary-foreground: #ffffff;
+  
+  --muted: #252527;
+  --muted-foreground: #cccccc;
+  
+  --accent: #333333;
+  --accent-foreground: #ffffff;
+  
+  --destructive: #ff453a;
+  --destructive-foreground: #ffffff;
+  
+  --border: #333333;
+  --input: #333333;
+  --ring: #2997ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-semibold tracking-tight;
+  }
+}
+
+@keyframes aurora-1 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -50px) scale(1.1); } 66% { transform: translate(-20px, 20px) scale(0.9); } }
+@keyframes aurora-2 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(-50px, 30px) scale(1.2); } 66% { transform: translate(20px, -20px) scale(0.8); } }
+@keyframes aurora-3 { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(20px, 20px) scale(0.9); } 66% { transform: translate(-30px, -30px) scale(1.1); } }
+
+@theme inline {
+  --animate-aurora-1: aurora-1 15s ease-in-out infinite;
+  --animate-aurora-2: aurora-2 20s ease-in-out infinite reverse;
+  --animate-aurora-3: aurora-3 25s ease-in-out infinite;
+}

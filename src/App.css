@@ -1,0 +1,36 @@
+.glass-effect { 
+  backdrop-filter: blur(24px); 
+  -webkit-backdrop-filter: blur(24px); 
+}
+
+.ken-burns { animation: kenBurns 40s ease-in-out infinite alternate; }
+@keyframes kenBurns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+.slide-in-right { animation: slideInRight 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.pulse-active { animation: pulse 2s infinite ease-in-out; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 197, 181, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(255, 197, 181, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 197, 181, 0); }
+}
+
+.fade-in-text { animation: textFade 1.5s ease-out forwards; }
+@keyframes textFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.image-contain {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: transparent;
+}
